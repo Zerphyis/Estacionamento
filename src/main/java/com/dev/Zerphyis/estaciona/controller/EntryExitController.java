@@ -22,9 +22,9 @@ public class EntryExitController {
                                                   @RequestParam Long parkingId) {
         try {
             EntryExit entry = service.registerEntry(personName, vehiclePlate, vehicleType, parkingId);
-            return new ResponseEntity<>(entry, HttpStatus.CREATED);  // Resposta no formato JSON
+            return new ResponseEntity<>(entry, HttpStatus.CREATED);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Resposta em caso de erro
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -33,9 +33,9 @@ public class EntryExitController {
     public ResponseEntity<EntryExit> exitVehicle(@PathVariable Long id) {
         try {
             EntryExit exit = service.registerExit(id);
-            return new ResponseEntity<>(exit, HttpStatus.OK);  // Resposta no formato JSON
+            return new ResponseEntity<>(exit, HttpStatus.OK);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Resposta em caso de erro
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

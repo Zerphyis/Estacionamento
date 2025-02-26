@@ -34,28 +34,22 @@ public class EntryExitService {
         }
 
         public EntryExit registerExit(Long id) {
-            // Buscar o registro da entrada do veículo pelo ID
             EntryExit entryExit = repository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Parking entry not found"));
 
-            // Atualizar o horário de saída
             entryExit.setExitTime(LocalDateTime.now());
 
-            // Buscar o estacionamento associado ao veículo
             Parking parking = parkingRepository.findById(entryExit.getParkingId())
                     .orElseThrow(() -> new RuntimeException("Parking not found"));
 
-            // Atualizar as vagas do estacionamento conforme o tipo do veículo
             if (entryExit.getVehicleType() == TypeVehicle.CAR) {
-                parking.setCarSpaces(parking.getCarSpaces() + 1); // Incrementar vaga de carro
+                parking.setCarSpaces(parking.getCarSpaces() + 1);
             } else if (entryExit.getVehicleType() == TypeVehicle.MOTORCYCLE) {
-                parking.setMotorcycleVacancies(parking.getMotorcycleVacancies() + 1); // Incrementar vaga de moto
+                parking.setMotorcycleVacancies(parking.getMotorcycleVacancies() + 1);
             }
 
-            // Salvar as mudanças no estacionamento
             parkingRepository.save(parking);
 
-            // Salvar a saída do veículo no registro
             return repository.save(entryExit);
         }
     }
