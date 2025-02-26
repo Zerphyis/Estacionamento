@@ -13,16 +13,17 @@ public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+
     private String mark;
-    @NotBlank
+
     private  String model;
-    @NotBlank
+
     private String color;
-    @NotBlank
+
     private String plate;
-    @NotNull
-    private TypeVehicle type;
+
+    @Enumerated(EnumType.STRING)
+    private TypeVehicle typeVehicle;
 
     public Vehicle(){
 
@@ -33,7 +34,7 @@ public class Vehicle {
         this.model= data.model();
         this.plate= data.plate();
         this.color= data.color();
-        this.type=data.type();
+        this.typeVehicle=data.typeVehicle();
     }
 
 
@@ -75,10 +76,10 @@ public class Vehicle {
     }
 
     public TypeVehicle getType() {
-        return type;
+        return typeVehicle;
     }
 
     public void setType(TypeVehicle type) {
-        this.type = type;
+        this.typeVehicle = type;
     }
 }
