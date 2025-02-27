@@ -3,7 +3,6 @@ package com.dev.Zerphyis.estaciona.controller;
 import com.dev.Zerphyis.estaciona.entity.entryExit.EntryExit;
 import com.dev.Zerphyis.estaciona.entity.vehicle.TypeVehicle;
 import com.dev.Zerphyis.estaciona.service.EntryExitService;
-import com.dev.Zerphyis.estaciona.service.ParkingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +27,6 @@ public class EntryExitController {
         }
     }
 
-    // Registrar a saída de um veículo
     @PostMapping("/saida/{id}")
     public ResponseEntity<EntryExit> exitVehicle(@PathVariable Long id) {
         try {

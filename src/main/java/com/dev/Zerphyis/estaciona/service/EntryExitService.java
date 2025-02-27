@@ -18,17 +18,14 @@ public class EntryExitService {
         EntryExitRepository repository;
 
         public EntryExit registerEntry(String personName, String vehiclePlate, TypeVehicle vehicleType, Long parkingId) {
-            // Buscar o estacionamento pelo ID passado como parâmetro
             Parking parking = parkingRepository.findById(parkingId)
                     .orElseThrow(() -> new RuntimeException("Parking not found"));
 
-            // Verificar se há vagas disponíveis de acordo com o tipo de veículo
             if ((vehicleType == TypeVehicle.CAR && parking.getCarSpaces() <= 0) ||
                     (vehicleType == TypeVehicle.MOTORCYCLE && parking.getMotorcycleVacancies() <= 0)) {
                 throw new RuntimeException("No available spots for this vehicle type");
             }
 
-            // Registrar a entrada do veículo
             EntryExit entry = new EntryExit(personName, vehiclePlate, LocalDateTime.now(), vehicleType, parkingId);
             return repository.save(entry);
         }
